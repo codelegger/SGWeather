@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //new HourlyApi().execute("http://www.nea.gov.sg/api/WebAPI/?dataset=2hr_nowcast&keyref=781CF461BB6606AD907750DFD1D076677BDD20C8534A2197");
-        new DailyApi().execute("http://www.nea.gov.sg/api/WebAPI/?dataset=24hrs_forecast&keyref=781CF461BB6606AD907750DFD1D076677BDD20C8534A2197");
+        new HourlyApi().execute("http://www.nea.gov.sg/api/WebAPI/?dataset=2hr_nowcast&keyref=781CF461BB6606AD907750DFD1D076677BDD20C8534A2197");
+        //new DailyApi().execute("http://www.nea.gov.sg/api/WebAPI/?dataset=24hrs_forecast&keyref=781CF461BB6606AD907750DFD1D076677BDD20C8534A2197");
 
         //initializeGAPI();
-        currentLatitude =1.327421f;
+        currentLatitude =1.317421f;
         currentLongitude =  103.863158f;
 
         setCurrentLocation();

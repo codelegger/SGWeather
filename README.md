@@ -1,5 +1,15 @@
 # SGWeather
 
+Features:
+##Show 24-Hours Forecast from NEA website
+##Show 2-hours/current forecast from NEA website of each Zone
+
+>>press/tap "Detail" button for 2hour forecast 
+
+
+
+
+
 
 -Must have internet connection
 Todo:

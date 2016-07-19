@@ -10,29 +10,37 @@ import java.util.List;
 public class HourlyForecast {
     private String validTime;
 
+    private static HourlyForecast _instance = null ;
 
-
-
-    private List<WeatherForecast> weatherItems ;
-
-    public HourlyForecast()
+    public static HourlyForecast getInstance()
     {
+        if(_instance == null)
+        {
+            _instance = new HourlyForecast();
+        }
+        return _instance;
+    }
+
+    private List<WeatherForecast> weatherItems;
+
+   private HourlyForecast() {
         weatherItems = new ArrayList<WeatherForecast>();
     }
 
-    public List<WeatherForecast> getWeatherItems()
-    {
+    public List<WeatherForecast> getWeatherItems() {
         return weatherItems;
     }
 
-    public void addWeatherItem(WeatherForecast w)
-    {
+    public void addWeatherItem(WeatherForecast w) {
         weatherItems.add(w);
     }
 
-    public void setValidTime(String validTime)
-    {
+    public void setValidTime(String validTime) {
         this.validTime = validTime;
+    }
+    public String getValidTime()
+    {
+        return validTime;
     }
 
 

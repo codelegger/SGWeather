@@ -12,7 +12,8 @@ public class Response {
      * Indicates result of background task
      */
     TaskResult taskResult;
+
     public enum ParseResult {OK, DATA_EXCEPTION}
 
-    public enum TaskResult { SUCCESS, BAD_RESPONSE, IO_EXCEPTION, TOO_MANY_REQUESTS; }
+    public enum TaskResult {SUCCESS, BAD_RESPONSE, IO_EXCEPTION, TOO_MANY_REQUESTS;}
 }

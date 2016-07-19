@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#546E7A</color>
+    <color name="colorPrimaryDark">#37474F</color>
+    <color name="colorAccent">#ECEFF1</color>
+    <color name="material_color_bluegrey_50">#ECEFF1</color>
+    <color name="material_color_bluegrey_100">#CFD8DC</color>
+    <color name="material_color_bluegrey_200">#B0BEC5</color>
+    <color name="material_color_bluegrey_300">#90A4AE</color>
+    <color name="material_color_bluegrey_400">#78909C</color>
+    <color name="material_color_bluegrey_500">#607D8B</color>
+    <color name="material_color_bluegrey_600">#546E7A</color>
+    <color name="material_color_bluegrey_700">#455A64</color>
+    <color name="material_color_bluegrey_800">#37474F</color>
 </resources>

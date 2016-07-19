@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">WeatherSG</string>
+    <string name="app_name">Weather SG</string>
+    <string name="morning">Morning</string>
+    <string name="afternoon">Afternoon</string>
+    <string name="night">Night</string>
+    <string name="south">South</string>
+    <string name="east">East</string>
+    <string name="central">Central</string>
+    <string name="west">West</string>
+    <string name="north">North</string>
+    <string name="details_arrows"><![CDATA[Details >>]]></string>
+    <string name="today">Today</string>
 </resources>

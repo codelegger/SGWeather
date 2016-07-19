@@ -63,9 +63,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private LocationRequest mLocationRequest;
     private double currentLatitude;
     private double currentLongitude;
-    public String currentLocation = "";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,7 +114,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
         if (isNetworkConnected()) {
 
-
+            /**
+             * TODO::Add Cache system to avoid extra network calls and check Validity Time of forecast to invalidate current forecast
+             *
+             */
             new HourlyApi(new Callback() {
                 @Override
                 public void onComplete() {
@@ -135,8 +135,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
             //currentLatitude = 1.317421f;
             //currentLongitude = 103.863158f;
 
-
-            System.out.print("curent location    " + currentLocation);
         } else {
             Toast.makeText(this, WeatherConstants.internetMessage, Toast.LENGTH_LONG).show();
             finish();
@@ -151,40 +149,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         //Toast.makeText(this, currentLatitude + currentLongitude + "", Toast.LENGTH_LONG).show();
 
     }
-
-//    public class HourlyApi extends RequestTask {
-//        int loading;
-//
-//        protected void onPreExecute() {
-//            loading = 0;
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Response output) {
-//            super.onPostExecute(output);
-//            // Update widgets
-////        AbstractWidgetProvider.updateWidgets(MainActivity.this);
-////        DashClockWeatherExtension.updateDashClock(MainActivity.this);
-//        }
-//
-//
-//        @Override
-//        protected String getAPIName() {
-//            return "2Hour - weather";
-//        }
-//
-//        @Override
-//        protected void updateMainUI() {
-//            //updateTodayWeatherUI();
-//            //updateLastUpdateTime();
-//        }
-//
-//        @Override
-//        protected Response.ParseResult parseResponse(String response) {
-//            return parseHourlyJson(response);
-//        }
-//    }
 
     public void initializeGAPI() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -202,181 +166,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     }
 
 
-//    public class DailyApi extends RequestTask {
-//        int loading;
-//
-//        @Override
-//        protected void onPreExecute() {
-//            loading = 0;
-//            super.onPreExecute();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Response output) {
-//            super.onPostExecute(output);
-//            // Update widgets
-////        AbstractWidgetProvider.updateWidgets(MainActivity.this);
-////        DashClockWeatherExtension.updateDashClock(MainActivity.this);
-//        }
-//
-//
-//        @Override
-//        protected String getAPIName() {
-//            return "2Hour - weather";
-//        }
-//
-//        @Override
-//        protected void updateMainUI() {
-//            //updateTodayWeatherUI();
-//            //updateLastUpdateTime();
-//        }
-//
-//        @Override
-//        protected Response.ParseResult parseResponse(String response) {
-//            return parseDailyJson(response);
-//        }
-//    }
 
-
-//    private ParseResult parseHourlyJson(String result) {
-//        try {
-//            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//            factory.setNamespaceAware(true);
-//            XmlPullParser xpp = factory.newPullParser();
-//            xpp.setInput(new StringReader(result));
-//            int eventType = xpp.getEventType();
-//            boolean validTime = false;
-//            boolean item;
-//            boolean startDocument = true;
-//            String text = "";
-//            while (eventType != XmlPullParser.END_DOCUMENT) {
-//                String tagname = xpp.getName();
-//
-//                switch (eventType) {
-//                    case XmlPullParser.START_TAG:
-//                        break;
-//                    case XmlPullParser.TEXT:
-//                        text = xpp.getText();
-//                        break;
-//                    case XmlPullParser.END_TAG:
-//                        if (tagname.equals("validTime")) {
-//                            hourlyForecast.setValidTime(text);
-//                        } else if (tagname.equals("area")) {
-//                            String forecast = xpp.getAttributeValue(null, "forecast");
-//                            String lat = xpp.getAttributeValue(null, "lat");
-//                            String lon = xpp.getAttributeValue(null, "lon");
-//                            String name = xpp.getAttributeValue(null, "name");
-//
-//                            System.out.println("Forecast  " + name);
-//                            WeatherForecast obj = new WeatherForecast(name, forecast, lat, lon);
-//                            hourlyForecast.addWeatherItem(obj);
-//                        }
-//                        break;
-//                }
-//
-//                eventType = xpp.next();
-//            }
-//            System.out.println("End document");
-//
-//
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//            return ParseResult.DATA_EXCEPTION;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return ParseResult.DATA_EXCEPTION;
-//
-//        }
-//
-//        return ParseResult.OK;
-//    }
-
-
-//    private ParseResult parseDailyJson(String result) {
-//        try {
-//            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//            factory.setNamespaceAware(true);
-//            XmlPullParser xpp = factory.newPullParser();
-//            xpp.setInput(new StringReader(result));
-//            int eventType = xpp.getEventType();
-//            boolean validTime = false;
-//            boolean item;
-//            boolean startDocument = true;
-//            String text = "";
-//            HashMap<String, String> forecast = new HashMap<String, String>();
-//            while (eventType != XmlPullParser.END_DOCUMENT) {
-//                String tagname = xpp.getName();
-//                switch (eventType) {
-//                    case XmlPullParser.START_TAG:
-//                        if (tagname.equals(WeatherConstants.morn) || tagname.equals(WeatherConstants.afternoon)
-//                                || tagname.equals(WeatherConstants.night)) {
-//                            forecast = new HashMap<String, String>();
-//                        }
-//
-//                        break;
-//                    case XmlPullParser.TEXT:
-//                        text = xpp.getText();
-//                        break;
-//                    case XmlPullParser.END_TAG:
-//                        if (tagname.equals(WeatherConstants.validTime)) {
-//                            dailyForecast.set(WeatherConstants.validTime, text);
-//                        } else if (tagname.equals(WeatherConstants.forecastIssue)) {
-//                            dailyForecast.set(WeatherConstants.forecastIssue, text);
-//                        } else if (tagname.equals(WeatherConstants.temperature)) {
-//                            String high = xpp.getAttributeValue(null, "high");
-//                            String low = xpp.getAttributeValue(null, "low");
-//                            String unit = xpp.getAttributeValue(null, "unit");
-//                            dailyForecast.set(WeatherConstants.temperature_high, high);
-//                            dailyForecast.set(WeatherConstants.temperature_low, low);
-//                            dailyForecast.set(WeatherConstants.temperature_unit, unit);
-//                        } else if (tagname.equals(WeatherConstants.relativeHumidity)) {
-//                            String high = xpp.getAttributeValue(null, "high");
-//                            String low = xpp.getAttributeValue(null, "low");
-//                            String unit = xpp.getAttributeValue(null, "unit");
-//                            dailyForecast.set(WeatherConstants.relativeHumidity_high, high);
-//                            dailyForecast.set(WeatherConstants.relativeHumidity_low, low);
-//                            dailyForecast.set(WeatherConstants.relativeHumidity_unit, unit);
-//                        } else if (tagname.equals(WeatherConstants.wind)) {
-//                            String direction = xpp.getAttributeValue(null, "direction");
-//                            String speed = xpp.getAttributeValue(null, "speed");
-//                            dailyForecast.set(WeatherConstants.wind_direction, direction);
-//                            dailyForecast.set(WeatherConstants.wind_speed, speed);
-//                        } else if (tagname.equals(WeatherConstants.timePeriod)) {
-//                            forecast.put(WeatherConstants.timePeriod, text);
-//                        } else if (tagname.equals(WeatherConstants.wxeast)) {
-//                            forecast.put(WeatherConstants.wxeast, text);
-//                        } else if (tagname.equals(WeatherConstants.wxcentral)) {
-//                            forecast.put(WeatherConstants.wxcentral, text);
-//                        } else if (tagname.equals(WeatherConstants.wxwest)) {
-//                            forecast.put(WeatherConstants.wxwest, text);
-//                        } else if (tagname.equals(WeatherConstants.wxnorth)) {
-//                            forecast.put(WeatherConstants.wxnorth, text);
-//                        } else if (tagname.equals(WeatherConstants.wxsouth)) {
-//                            forecast.put(WeatherConstants.wxsouth, text);
-//                        }
-//                        if (tagname.equals(WeatherConstants.morn) || tagname.equals(WeatherConstants.afternoon)
-//                                || tagname.equals(WeatherConstants.night)) {
-//                            dailyForecast.set(tagname, forecast);
-//                        }
-//                        break;
-//                }
-//
-//                eventType = xpp.next();
-//            }
-//            System.out.println("End document");
-//
-//
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//            return ParseResult.DATA_EXCEPTION;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return ParseResult.DATA_EXCEPTION;
-//
-//        }
-//
-//        return ParseResult.OK;
-//    }
 
 
     @Override
@@ -469,7 +259,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
             if (results[0] <= shortestDistance) {
                 shortestDistance = results[0];
-                currentLocation = obj.getName();
                 nearByForecast = obj;
             }
             obj.setNearBy(false);
@@ -560,14 +349,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
         morningButton.setSelected(false);
         afternoonButton.setSelected(false);
         nightButton.setSelected(false);
-
         selected.setSelected(true);
     }
 
-
+    /**
+     * TODO:: should be moved in a Utility class
+     * @return
+     */
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         boolean isNetworkConnected = cm.getActiveNetworkInfo() != null;
         return isNetworkConnected;
     }
